@@ -1,0 +1,22 @@
+- hosts: gui
+  vars:
+    - x: 
+      - "httpd"
+      - "php"      
+  tasks:
+    # using loop directly
+    - name: Package with loop
+      package:
+        name: "{{ item }}"
+        state: present
+      loop:
+        - "httpd"
+        - "php"
+
+    # using loop in an array of list varible
+    - name: Loops with Variable
+      package:
+        name: "{{item}}"
+        state: present
+      loop: "{{x}}"
+     

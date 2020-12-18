@@ -1,0 +1,15 @@
+- hosts: 127.0.0.1
+  vars_files:
+    - up.yml
+  tasks:
+  - name: Sending an e-mail using Gmail SMTP servers
+    mail:
+      host: smtp.gmail.com
+      port: 587
+      username: "{{ u }}"
+      password: "{{ p }}"
+      to: Bhavna Choubey <bhavnachoubey786@gmail.com>
+      subject: Love from me
+      body: I Love You Jaan!
+
+

@@ -1,0 +1,14 @@
+- hosts: 127.0.0.1
+  vars:
+    # This format works as a list of dictionaries
+    - userdb:
+      - name: "Prateek"
+        phone : 1111
+      - name: "Bhavna" 
+        phone: 2222
+      - name: "Sanodiya"
+        phone:  3333
+  tasks:
+    - debug:
+        #accessing value of a key in the dictionary
+        var: userdb
