@@ -15,7 +15,7 @@
     - name: create user
       user:
         name: "jack1"
-        password: "fuck"
+        password: "'fuck' | password_hash('sha512')"
         state: present
 
    # Addng user to a Group
