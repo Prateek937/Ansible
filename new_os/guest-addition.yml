@@ -1,0 +1,21 @@
+- hosts: all
+  vars:
+    - pkges:
+        - perl
+        - gcc
+        - g++
+        - gcc-c++
+        - kernel-devel
+        - kernel-headers
+        - bzip2
+        - make
+        - dkms
+        - elfutils-libelf-devel
+  tasks:
+    - name: installing epel
+      shell: yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm -y
+    
+    - package:
+        name: "{{ item }}"
+        state: present
+      loop: "{{ pkges }}"

@@ -1,0 +1,28 @@
+- hosts: all
+  tasks:
+    - file:
+        path: /rhel
+        state: directory
+    
+    - shell: "mount /dev/sr0 /rhel"
+
+    - lineinfile:
+        path: "/etc/rc.d/rc.local"
+        line: mount /dev/sr0 /rhel
+        insertbefore: BOF
+
+    - shell: "chmod +x /etc/rc.d/rc.local"
+
+    - yum_repository:
+        name: appstream
+        description: appstream
+        baseurl: file:///rhel/AppStream
+        gpgcheck: no
+      ignore_errors: yes
+
+    - yum_repository:
+        name: baseos
+        description: baseos
+        baseurl: file:///rhel/BaseOS
+        gpgcheck: no
+      ignore_errors: yes

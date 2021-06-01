@@ -13,20 +13,6 @@
         baseurl: https://download.docker.com/linux/centos/7/x86_64/stable
         gpgcheck: no
     
-    - yum_repository:
-        name: appstream
-        description: appstream
-        baseurl: file:///run/media/root/RHEL-8-0-0-BaseOS-x86_64/AppStream
-        gpgcheck: no
-      ignore_errors: yes
-
-    - yum_repository:
-        name: baseos
-        description: baseos
-        baseurl: file:///run/media/root/RHEL-8-0-0-BaseOS-x86_64/BaseOS
-        gpgcheck: no
-      ignore_errors: yes
-
     - name: Installing Docker-ce
       command:
         cmd: "yum install docker-ce --nobest -y"
@@ -36,6 +22,7 @@
       service:
         name: docker
         state: started
+        enabled: yes
       changed_when: false
 
     - name: Installing Essentials
@@ -43,24 +30,22 @@
         name: "{{ item }}"
         state: present
       loop: "{{ x }}"
-
     - name: Installing Docker API
       pip:
         name: docker
-
-    - name: pulling Image
-      docker_image:
-        name: httpd
-        state: present
-        source: pull
- 
-    - name: Running Docker Container
-      docker_container:
-        name: web1
-        image: httpd
-        state: started
-        ports:
-          - "8080:80"
-        volumes:
-          - /var/www/html:/usr/local/apache2/htdocs/      
-
+      
+#    - name: pulling Image
+#      docker_image:
+#        name: httpd
+#        state: present
+#        source: pull
+#
+#    - name: Running Docker Container
+#      docker_container:
+#        name: web1
+#        image: httpd
+#        state: started
+#        ports:
+#          - "8080:80"
+#        volumes:
+#          - /var/www/html:/usr/local/apache2/htdocs/     

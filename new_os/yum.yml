@@ -1,0 +1,15 @@
+- hosts: all
+  tasks:
+    - yum_repository:
+        name: appstream
+        description: appstream
+        baseurl: file:///run/media/root/RHEL-8-0-0-BaseOS-x86_64/AppStream
+        gpgcheck: no
+      ignore_errors: yes
+
+    - yum_repository:
+        name: baseos
+        description: baseos
+        baseurl: file:///run/media/root/RHEL-8-0-0-BaseOS-x86_64/BaseOS
+        gpgcheck: no
+      ignore_errors: yes
